@@ -1,20 +1,34 @@
 <!DOCTYPE html>
-<html lang="lv">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Otto | Web Developer</title>
+  <title>Webbyoto — Web Design & Development</title>
+
   <meta
     name="description"
-    content="Modernas un responsīvas mājaslapas uzņēmumiem."
+    content="Webbyoto creates fresh, responsive websites for modern businesses. Website development, redesign and maintenance by Oto."
   >
 
   <style>
+    :root {
+      --bg: #07110f;
+      --bg-soft: #0b1715;
+      --text: #f1f7f5;
+      --muted: #8fa7a1;
+      --mint: #5ee6c4;
+      --mint-light: #8ff3d9;
+      --blue: #64b5f6;
+      --border: rgba(159, 225, 208, 0.13);
+      --radius: 22px;
+      --container: 1180px;
+    }
+
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     html {
@@ -22,445 +36,3260 @@
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #080a09;
-      color: #ffffff;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
     }
 
     .container {
-      width: min(1100px, calc(100% - 40px));
+      width: min(var(--container), calc(100% - 48px));
       margin: 0 auto;
     }
 
+    /* BACKGROUND */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.15;
+    }
+
+    .glow-one {
+      width: 520px;
+      height: 520px;
+      top: -200px;
+      right: -160px;
+      background: var(--mint);
+    }
+
+    .glow-two {
+      width: 520px;
+      height: 520px;
+      bottom: 5%;
+      left: -250px;
+      background: var(--blue);
+      opacity: 0.1;
+    }
+
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.018) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.018) 1px,
+          transparent 1px
+        );
+
+      background-size: 70px 70px;
+    }
+
+    /* NAV */
+
+    .nav-wrapper {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+
+      background: rgba(7,17,15,0.76);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom:
+        1px solid rgba(255,255,255,0.05);
+    }
+
     nav {
-      height: 80px;
+      min-height: 78px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      gap: 25px;
     }
 
     .logo {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 1px;
+      text-decoration: none;
+      color: var(--text);
+
+      font-size: 20px;
+      font-weight: 850;
+
+      letter-spacing: -0.7px;
+    }
+
+    .logo-dot {
+      color: var(--mint);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
     }
 
     .nav-links {
       display: flex;
-      gap: 28px;
+      align-items: center;
+      gap: 25px;
     }
 
     .nav-links a {
-      color: #a3a3a3;
+      color: var(--muted);
       text-decoration: none;
-      transition: color 0.2s;
+      font-size: 14px;
+      transition: 0.2s;
     }
 
     .nav-links a:hover {
-      color: #ffffff;
+      color: var(--text);
     }
+
+    .nav-contact {
+      padding: 9px 15px;
+
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+
+    /* LANGUAGE */
+
+    .language-switcher {
+      display: flex;
+      align-items: center;
+
+      gap: 4px;
+      padding: 4px;
+
+      border: 1px solid var(--border);
+      border-radius: 100px;
+
+      background: rgba(255,255,255,0.025);
+    }
+
+    .lang-button {
+      border: 0;
+      border-radius: 100px;
+
+      padding: 6px 9px;
+
+      background: transparent;
+      color: #78918a;
+
+      cursor: pointer;
+
+      font-size: 11px;
+      font-weight: 750;
+
+      transition: 0.2s;
+    }
+
+    .lang-button:hover {
+      color: var(--text);
+    }
+
+    .lang-button.active {
+      background: var(--mint);
+      color: #052019;
+    }
+
+    /* HERO */
 
     .hero {
-      min-height: calc(100vh - 80px);
+      min-height: 100vh;
+
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 70px 0;
-      max-width: 950px;
+      align-items: center;
+
+      padding-top: 120px;
+      padding-bottom: 80px;
     }
 
-    .label {
-      color: #22c55e;
+    .hero-content {
+      max-width: 1000px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      margin-bottom: 28px;
+      padding: 8px 13px;
+
+      color: var(--muted);
       font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
+
+      border: 1px solid var(--border);
+      border-radius: 100px;
+
+      background: rgba(255,255,255,0.025);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+      background: var(--mint);
+
+      box-shadow:
+        0 0 15px rgba(94,230,196,0.8);
     }
 
     h1 {
-      font-size: clamp(48px, 8vw, 88px);
-      line-height: 1.02;
-      letter-spacing: -4px;
+      max-width: 1050px;
+
+      font-size:
+        clamp(54px, 8.5vw, 108px);
+
+      line-height: 0.94;
+      letter-spacing: -0.065em;
     }
 
-    .hero-text {
-      color: #a3a3a3;
-      font-size: 19px;
+    .accent {
+      color: var(--mint);
+    }
+
+    .hero-description {
       max-width: 650px;
-      margin-top: 28px;
+
+      margin-top: 34px;
+
+      color: var(--muted);
+
+      font-size:
+        clamp(17px, 2vw, 20px);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 36px;
     }
 
     .button {
-      display: inline-block;
-      width: fit-content;
-      margin-top: 32px;
-      padding: 14px 22px;
-      background: #22c55e;
-      color: #041008;
+      min-height: 52px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0 22px;
+
+      border-radius: 12px;
+
       text-decoration: none;
-      border-radius: 8px;
+
+      font-size: 14px;
       font-weight: 700;
-      transition: 0.2s;
+
+      transition:
+        transform 0.2s,
+        background 0.2s,
+        border-color 0.2s;
     }
 
-    .button:hover {
-      background: #4ade80;
-      transform: translateY(-2px);
+    .button-primary {
+      background: var(--mint);
+      color: #052019;
     }
+
+    .button-primary:hover {
+      transform: translateY(-3px);
+      background: var(--mint-light);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      border: 1px solid var(--border);
+
+      background: rgba(255,255,255,0.025);
+    }
+
+    .button-secondary:hover {
+      transform: translateY(-3px);
+
+      border-color:
+        rgba(94,230,196,0.45);
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: center;
+
+      gap: 16px;
+
+      margin-top: 95px;
+
+      color: #59736c;
+
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .line {
+      width: 60px;
+      height: 1px;
+
+      background: var(--mint);
+      opacity: 0.5;
+    }
+
+    /* SECTIONS */
 
     section {
-      padding: 100px 0;
+      padding: 120px 0;
+    }
+
+    .section-heading {
+      display: grid;
+
+      grid-template-columns:
+        180px 1fr;
+
+      gap: 40px;
+
+      margin-bottom: 60px;
+    }
+
+    .section-number {
+      color: var(--mint);
+
+      font-size: 13px;
+      font-weight: 750;
+
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     h2 {
-      font-size: clamp(34px, 5vw, 50px);
-      line-height: 1.1;
-      margin-bottom: 18px;
+      max-width: 780px;
+
+      font-size:
+        clamp(38px, 6vw, 68px);
+
+      line-height: 1;
+      letter-spacing: -0.045em;
     }
 
-    .section-description {
-      color: #8a8a8a;
-      max-width: 620px;
-      margin-bottom: 42px;
-    }
+    /* SERVICES */
 
-    .about {
+    .services-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
-      align-items: center;
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 14px;
     }
 
-    .about-text p {
-      color: #999999;
+    .service-card {
+      min-height: 330px;
+
+      display: flex;
+      flex-direction: column;
+
+      padding: 30px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.045),
+          rgba(255,255,255,0.01)
+        );
+
+      transition: 0.25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-7px);
+
+      border-color:
+        rgba(94,230,196,0.32);
+
+      background:
+        rgba(19,39,35,0.9);
+    }
+
+    .service-number {
+      color: var(--mint);
+      font-size: 13px;
+    }
+
+    .service-content {
+      margin-top: auto;
+    }
+
+    .service-card h3 {
+      margin-bottom: 10px;
+
+      font-size: 24px;
+      letter-spacing: -0.025em;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* PROJECTS */
+
+    .projects-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 15px;
+    }
+
+    .project-card {
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background:
+        rgba(255,255,255,0.018);
+
+      transition:
+        transform 0.25s,
+        border-color 0.25s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+
+      border-color:
+        rgba(94,230,196,0.35);
+    }
+
+    .project-preview {
+      height: 240px;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+
+      border-bottom:
+        1px solid var(--border);
+    }
+
+    .restaurant-preview {
+      background:
+        radial-gradient(
+          circle at 70% 20%,
+          rgba(246,170,88,0.28),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          #181714,
+          #0b1210
+        );
+    }
+
+    .auto-preview {
+      background:
+        radial-gradient(
+          circle at 20% 75%,
+          rgba(100,181,246,0.25),
+          transparent 35%
+        ),
+        linear-gradient(
+          145deg,
+          #09141a,
+          #101b1e
+        );
+    }
+
+    .beauty-preview {
+      background:
+        radial-gradient(
+          circle at 70% 30%,
+          rgba(182,129,255,0.24),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          #17121a,
+          #0e1716
+        );
+    }
+
+    .mock-browser {
+      width: 78%;
+
+      border:
+        1px solid rgba(255,255,255,0.14);
+
+      border-radius: 9px;
+
+      overflow: hidden;
+
+      background: #0a0e0d;
+
+      box-shadow:
+        0 25px 55px rgba(0,0,0,0.35);
+
+      transform: rotate(-2deg);
+    }
+
+    .project-card:nth-child(2)
+    .mock-browser {
+      transform: rotate(2deg);
+    }
+
+    .mock-bar {
+      height: 24px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 5px;
+
+      padding: 0 9px;
+
+      background:
+        rgba(255,255,255,0.06);
+    }
+
+    .mock-dot {
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+      background: #73837f;
+    }
+
+    .mock-content {
+      min-height: 125px;
+
+      padding: 22px 18px;
+    }
+
+    .mock-title {
+      width: 68%;
+      height: 8px;
+
+      margin-bottom: 10px;
+
+      border-radius: 20px;
+      background: var(--mint);
+    }
+
+    .mock-line {
+      width: 90%;
+      height: 5px;
+
+      margin-top: 7px;
+
+      border-radius: 20px;
+
+      background:
+        rgba(255,255,255,0.16);
+    }
+
+    .mock-line.short {
+      width: 55%;
+    }
+
+    .mock-button {
+      width: 52px;
+      height: 16px;
+
+      margin-top: 17px;
+
+      border-radius: 4px;
+
+      background: var(--mint);
+    }
+
+    .project-body {
+      padding: 26px;
+    }
+
+    .project-meta {
+      display: flex;
+
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 10px;
+
       margin-bottom: 16px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+    .concept {
+      color: var(--mint);
+
+      font-size: 10px;
+      font-weight: 750;
+
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
     }
 
-    .card {
-      background: #101211;
-      border: 1px solid #232624;
-      border-radius: 14px;
-      padding: 30px;
-      transition: 0.2s;
+    .project-type {
+      color: #58716a;
+      font-size: 11px;
     }
 
-    .card:hover {
-      border-color: #3b423e;
-      transform: translateY(-3px);
+    .project-card h3 {
+      font-size: 23px;
+
+      letter-spacing: -0.03em;
     }
 
-    .card-number {
-      color: #22c55e;
-      font-size: 12px;
+    .project-description {
+      min-height: 70px;
+
+      margin-top: 10px;
+
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .project-toggle {
+      margin-top: 20px;
+
+      padding: 0;
+
+      border: 0;
+
+      background: transparent;
+
+      color: var(--mint);
+
+      cursor: pointer;
+
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 28px;
     }
 
-    .card h3 {
-      font-size: 21px;
-      margin-bottom: 10px;
+    .project-details {
+      display: none;
+
+      margin-top: 18px;
+      padding-top: 18px;
+
+      border-top:
+        1px solid var(--border);
+
+      color: var(--muted);
+
+      font-size: 13px;
     }
 
-    .card p {
-      color: #8e8e8e;
+    .project-card.open
+    .project-details {
+      display: block;
     }
 
-    .projects .card {
-      min-height: 240px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+    /* ABOUT */
+
+    .about-layout {
+      display: grid;
+
+      grid-template-columns:
+        0.85fr 1.15fr;
+
+      gap: 100px;
+
+      align-items: start;
+    }
+
+    .about-title {
+      font-size:
+        clamp(46px, 7vw, 80px);
+
+      line-height: 0.95;
+
+      letter-spacing: -0.055em;
+    }
+
+    .about-title span {
+      color: var(--mint);
+    }
+
+    .about-text {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .about-text p + p {
+      margin-top: 20px;
+    }
+
+    /* SKILLS */
+
+    .skills-panel {
+      padding: 36px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius);
+
+      background:
+        rgba(255,255,255,0.018);
+    }
+
+    .skill-group + .skill-group {
+      margin-top: 34px;
+      padding-top: 34px;
+
+      border-top:
+        1px solid var(--border);
+    }
+
+    .skill-group h3 {
+      margin-bottom: 20px;
+      font-size: 19px;
     }
 
     .skills {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 30px;
+      gap: 9px;
     }
 
     .skill {
-      border: 1px solid #303330;
-      color: #b5b5b5;
-      padding: 9px 15px;
+      padding: 8px 13px;
+
+      color: #b7cbc6;
+      font-size: 13px;
+
+      border:
+        1px solid var(--border);
+
       border-radius: 100px;
+
+      background:
+        rgba(255,255,255,0.02);
+    }
+
+    /* PROCESS */
+
+    .process-list {
+      border-top:
+        1px solid var(--border);
+    }
+
+    .process-item {
+      display: grid;
+
+      grid-template-columns:
+        90px 1fr auto;
+
+      align-items: center;
+
+      gap: 30px;
+
+      padding: 28px 0;
+
+      border-bottom:
+        1px solid var(--border);
+    }
+
+    .process-number {
+      color: var(--mint);
+      font-size: 13px;
+    }
+
+    .process-item h3 {
+      font-size:
+        clamp(21px, 3vw, 30px);
+
+      letter-spacing: -0.025em;
+    }
+
+    .process-item p {
+      max-width: 390px;
+
+      color: var(--muted);
       font-size: 14px;
     }
+
+    /* RESUME */
+
+    .resume-shell {
+      overflow: hidden;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 26px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(94,230,196,0.06),
+          rgba(100,181,246,0.025)
+        );
+    }
+
+    .resume-top {
+      display: flex;
+
+      justify-content: space-between;
+      align-items: flex-start;
+
+      gap: 40px;
+
+      padding: 42px;
+    }
+
+    .resume-name {
+      font-size:
+        clamp(32px, 5vw, 52px);
+
+      line-height: 1;
+      letter-spacing: -0.045em;
+    }
+
+    .resume-role {
+      margin-top: 10px;
+
+      color: var(--mint);
+      font-size: 15px;
+    }
+
+    .resume-summary {
+      max-width: 620px;
+
+      margin-top: 20px;
+
+      color: var(--muted);
+    }
+
+    .resume-contact {
+      text-align: right;
+
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .resume-contact a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .resume-grid {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      border-top:
+        1px solid var(--border);
+    }
+
+    .resume-block {
+      padding: 38px 42px;
+    }
+
+    .resume-block:nth-child(odd) {
+      border-right:
+        1px solid var(--border);
+    }
+
+    .resume-block:nth-child(n + 3) {
+      border-top:
+        1px solid var(--border);
+    }
+
+    .resume-block h3 {
+      margin-bottom: 18px;
+
+      color: var(--mint);
+
+      font-size: 13px;
+
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .resume-block h4 {
+      margin-bottom: 7px;
+      font-size: 18px;
+    }
+
+    .resume-block p,
+    .resume-block li {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .resume-block ul {
+      padding-left: 18px;
+    }
+
+    .resume-block li + li {
+      margin-top: 7px;
+    }
+
+    /* CONTACT */
 
     .contact {
-      text-align: center;
-      padding: 140px 0;
+      padding-top: 150px;
+      padding-bottom: 150px;
     }
 
-    .contact p {
-      color: #999999;
-      max-width: 560px;
-      margin: 0 auto;
+    .contact-label {
+      margin-bottom: 22px;
+
+      color: var(--mint);
+
+      font-size: 13px;
+
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
+
+    .contact h2 {
+      max-width: 900px;
+    }
+
+    .email {
+      display: inline-block;
+
+      margin-top: 38px;
+      padding-bottom: 4px;
+
+      color: var(--text);
+
+      text-decoration: none;
+
+      font-size:
+        clamp(20px, 3vw, 30px);
+
+      font-weight: 700;
+
+      border-bottom:
+        1px solid var(--mint);
+    }
+
+    .email:hover {
+      color: var(--mint);
+    }
+
+    /* FOOTER */
 
     footer {
-      border-top: 1px solid #202220;
       padding: 30px 0;
-      color: #666666;
-      font-size: 14px;
+
+      border-top:
+        1px solid var(--border);
     }
 
     .footer-content {
       display: flex;
+
       justify-content: space-between;
+
+      gap: 20px;
+
+      color: #607871;
+      font-size: 13px;
     }
 
-    @media (max-width: 760px) {
-      .nav-links {
+    /* ANIMATION */
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(20px);
+
+      transition:
+        opacity 0.65s ease,
+        transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* TABLET */
+
+    @media (max-width: 950px) {
+      .nav-links a:not(.nav-contact) {
         display: none;
       }
 
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .services-grid,
+      .projects-grid {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .service-card:last-child,
+      .project-card:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .about-layout {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .process-item {
+        grid-template-columns:
+          60px 1fr;
+      }
+
+      .process-item p {
+        grid-column: 2;
+      }
+
+      .resume-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .resume-block:nth-child(odd) {
+        border-right: none;
+      }
+
+      .resume-block + .resume-block {
+        border-top:
+          1px solid var(--border);
+      }
+    }
+
+    /* PHONE */
+
+    @media (max-width: 650px) {
+      .container {
+        width:
+          min(
+            100% - 32px,
+            var(--container)
+          );
+      }
+
+      nav {
+        min-height: 68px;
+      }
+
+      .nav-right {
+        gap: 8px;
+      }
+
+      .nav-contact {
+        display: none;
+      }
+
+      .language-switcher {
+        gap: 1px;
+      }
+
+      .lang-button {
+        padding: 5px 7px;
+      }
+
+      .hero {
+        min-height: 92svh;
+        padding-top: 110px;
+      }
+
       h1 {
-        letter-spacing: -2px;
+        font-size:
+          clamp(48px, 16vw, 74px);
       }
 
-      .grid {
-        grid-template-columns: 1fr;
+      .hero-description {
+        font-size: 17px;
       }
 
-      .about {
-        grid-template-columns: 1fr;
-        gap: 30px;
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-bottom {
+        margin-top: 60px;
       }
 
       section {
-        padding: 70px 0;
+        padding: 85px 0;
+      }
+
+      .services-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card:last-child,
+      .project-card:last-child {
+        grid-column: auto;
+      }
+
+      .service-card {
+        min-height: 260px;
+        padding: 25px;
+      }
+
+      .project-preview {
+        height: 220px;
+      }
+
+      .project-description {
+        min-height: auto;
+      }
+
+      .skills-panel {
+        padding: 25px;
+      }
+
+      .process-item {
+        grid-template-columns:
+          45px 1fr;
+
+        gap: 14px;
+      }
+
+      .resume-top {
+        flex-direction: column;
+        padding: 28px;
+      }
+
+      .resume-contact {
+        text-align: left;
+      }
+
+      .resume-block {
+        padding: 28px;
       }
 
       .contact {
-        padding: 100px 0;
+        padding-top: 100px;
+        padding-bottom: 100px;
       }
 
       .footer-content {
         flex-direction: column;
-        gap: 6px;
       }
     }
   </style>
 </head>
 
+
 <body>
 
-  <header class="container">
-    <nav>
-      <div class="logo">OTTO.</div>
+  <div class="background">
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+    <div class="grid-bg"></div>
+  </div>
 
-      <div class="nav-links">
-        <a href="#about">Par mani</a>
-        <a href="#services">Pakalpojumi</a>
-        <a href="#projects">Projekti</a>
-        <a href="#contact">Kontakti</a>
+
+  <!-- NAVIGATION -->
+
+  <div class="nav-wrapper">
+
+    <nav class="container">
+
+      <a class="logo" href="#">
+        WEBBYOTO<span class="logo-dot">.</span>
+      </a>
+
+
+      <div class="nav-right">
+
+        <div class="nav-links">
+
+          <a
+            href="#services"
+            data-i18n="navServices"
+          >
+            Services
+          </a>
+
+          <a
+            href="#work"
+            data-i18n="navWork"
+          >
+            Work
+          </a>
+
+          <a
+            href="#about"
+            data-i18n="navAbout"
+          >
+            About
+          </a>
+
+          <a
+            href="#skills"
+            data-i18n="navSkills"
+          >
+            Skills
+          </a>
+
+          <a
+            href="#resume"
+            data-i18n="navResume"
+          >
+            Resume
+          </a>
+
+          <a
+            class="nav-contact"
+            href="#contact"
+            data-i18n="navContact"
+          >
+            Contact ↗
+          </a>
+
+        </div>
+
+
+        <div class="language-switcher">
+
+          <button
+            class="lang-button active"
+            data-lang="en"
+          >
+            EN
+          </button>
+
+          <button
+            class="lang-button"
+            data-lang="lv"
+          >
+            LV
+          </button>
+
+          <button
+            class="lang-button"
+            data-lang="ru"
+          >
+            RU
+          </button>
+
+        </div>
+
       </div>
+
     </nav>
-  </header>
+
+  </div>
+
 
   <main>
 
+    <!-- HERO -->
+
     <div class="container">
+
       <section class="hero">
 
-        <div class="label">Web Developer</div>
+        <div class="hero-content">
 
-        <h1>
-          Mājaslapas, kas palīdz biznesam izskatīties profesionāli.
-        </h1>
+          <div class="status">
 
-        <p class="hero-text">
-          Veidoju modernas, ātras un mobilajām ierīcēm pielāgotas
-          mājaslapas uzņēmumiem un pakalpojumu sniedzējiem.
-        </p>
+            <span class="status-dot"></span>
 
-        <a class="button" href="#contact">
-          Apspriest projektu
-        </a>
+            <span data-i18n="available">
+              Available for new projects
+            </span>
+
+          </div>
+
+
+          <h1>
+
+            <span data-i18n="heroOne">
+              Websites people
+            </span>
+
+            <span
+              class="accent"
+              data-i18n="heroTwo"
+            >
+              actually enjoy
+            </span>
+
+            <span data-i18n="heroThree">
+              using.
+            </span>
+
+          </h1>
+
+
+          <p
+            class="hero-description"
+            data-i18n="heroDescription"
+          >
+            I'm Oto. I create fresh, responsive
+            websites for businesses that want
+            something cleaner, faster and more
+            memorable than another generic template.
+          </p>
+
+
+          <div class="hero-actions">
+
+            <a
+              class="button button-primary"
+              href="#contact"
+              data-i18n="startProject"
+            >
+              Start a project ↗
+            </a>
+
+            <a
+              class="button button-secondary"
+              href="#work"
+              data-i18n="seeWork"
+            >
+              See my work
+            </a>
+
+          </div>
+
+
+          <div class="hero-bottom">
+
+            <span class="line"></span>
+
+            <span data-i18n="heroServices">
+              Design · Development · Maintenance
+            </span>
+
+          </div>
+
+        </div>
 
       </section>
+
     </div>
 
 
-    <section id="about">
-      <div class="container about">
-
-        <div>
-          <div class="label">Par mani</div>
-
-          <h2>
-            Vienkārši un moderni digitālie risinājumi.
-          </h2>
-        </div>
-
-        <div class="about-text">
-
-          <p>
-            Veidoju pārskatāmas, modernas un lietotājam ērtas
-            mājaslapas uzņēmumiem.
-          </p>
-
-          <p>
-            Mans mērķis ir palīdzēt biznesam profesionāli
-            izskatīties internetā un klientiem ātri atrast
-            nepieciešamo informāciju.
-          </p>
-
-        </div>
-      </div>
-    </section>
-
+    <!-- SERVICES -->
 
     <section id="services">
-      <div class="container">
 
-        <div class="label">Pakalpojumi</div>
+      <div class="container reveal">
 
-        <h2>Ko es piedāvāju</h2>
+        <div class="section-heading">
 
-        <p class="section-description">
-          Mājaslapas uzņēmumiem un pakalpojumu sniedzējiem,
-          koncentrējoties uz skaidru dizainu un ērtu lietošanu.
-        </p>
+          <div
+            class="section-number"
+            data-i18n="servicesLabel"
+          >
+            01 / Services
+          </div>
 
-        <div class="grid">
+          <h2 data-i18n="servicesTitle">
+            Everything your website needs.
+          </h2>
 
-          <article class="card">
-            <div class="card-number">01</div>
+        </div>
 
-            <h3>Uzņēmumu mājaslapas</h3>
 
-            <p>
-              Profesionāla mājaslapa, kas parāda uzņēmumu,
-              pakalpojumus un kontaktinformāciju.
-            </p>
+        <div class="services-grid">
+
+          <article class="service-card">
+
+            <div class="service-number">
+              01
+            </div>
+
+            <div class="service-content">
+
+              <h3 data-i18n="developmentTitle">
+                Website Development
+              </h3>
+
+              <p data-i18n="developmentText">
+                Clean, responsive websites designed
+                to work smoothly across desktop,
+                tablet and mobile.
+              </p>
+
+            </div>
+
           </article>
 
 
-          <article class="card">
-            <div class="card-number">02</div>
+          <article class="service-card">
 
-            <h3>Responsive dizains</h3>
+            <div class="service-number">
+              02
+            </div>
 
-            <p>
-              Mājaslapa tiek pielāgota telefonam,
-              planšetei un datoram.
-            </p>
+            <div class="service-content">
+
+              <h3 data-i18n="redesignTitle">
+                Website Redesign
+              </h3>
+
+              <p data-i18n="redesignText">
+                Giving outdated websites a fresh
+                look with improved structure,
+                usability and mobile support.
+              </p>
+
+            </div>
+
           </article>
 
 
-          <article class="card">
-            <div class="card-number">03</div>
+          <article class="service-card">
 
-            <h3>Mājaslapu modernizācija</h3>
+            <div class="service-number">
+              03
+            </div>
 
-            <p>
-              Novecojušas vietnes dizaina un
-              lietojamības uzlabošana.
-            </p>
+            <div class="service-content">
+
+              <h3 data-i18n="maintenanceTitle">
+                Maintenance
+              </h3>
+
+              <p data-i18n="maintenanceText">
+                Updates, improvements and ongoing
+                support to keep your website fresh
+                and working properly.
+              </p>
+
+            </div>
+
           </article>
 
         </div>
+
       </div>
+
     </section>
 
 
-    <section id="projects" class="projects">
-      <div class="container">
+    <!-- PROJECTS -->
 
-        <div class="label">Projekti</div>
+    <section id="work">
 
-        <h2>Mani darbi</h2>
+      <div class="container reveal">
 
-        <p class="section-description">
-          Šeit pievienošu savus jaunākos web projektus.
-        </p>
+        <div class="section-heading">
 
-        <div class="grid">
+          <div
+            class="section-number"
+            data-i18n="workLabel"
+          >
+            02 / Selected Work
+          </div>
 
-          <article class="card">
-            <div class="card-number">PROJECT 01</div>
-            <h3>Uzņēmuma mājaslapa</h3>
-            <p>Drīzumā</p>
+          <h2 data-i18n="workTitle">
+            A few examples of what I can build.
+          </h2>
+
+        </div>
+
+
+        <div class="projects-grid">
+
+          <!-- RESTAURANT -->
+
+          <article class="project-card">
+
+            <div
+              class="
+                project-preview
+                restaurant-preview
+              "
+            >
+
+              <div class="mock-browser">
+
+                <div class="mock-bar">
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                </div>
+
+                <div class="mock-content">
+                  <div class="mock-title"></div>
+                  <div class="mock-line"></div>
+                  <div class="mock-line short"></div>
+                  <div class="mock-button"></div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="project-body">
+
+              <div class="project-meta">
+
+                <span
+                  class="concept"
+                  data-i18n="concept"
+                >
+                  Concept Project
+                </span>
+
+                <span
+                  class="project-type"
+                  data-i18n="restaurantType"
+                >
+                  Restaurant
+                </span>
+
+              </div>
+
+
+              <h3 data-i18n="restaurantTitle">
+                Restaurant Website
+              </h3>
+
+              <p
+                class="project-description"
+                data-i18n="restaurantDescription"
+              >
+                A modern restaurant concept focused
+                on atmosphere, menu discovery and
+                simple reservations.
+              </p>
+
+
+              <button
+                class="project-toggle"
+                data-project
+                data-i18n="viewDetails"
+              >
+                View details ↓
+              </button>
+
+
+              <div class="project-details">
+
+                <p data-i18n="restaurantDetails">
+                  Designed for a modern local
+                  restaurant with a strong hero,
+                  menu sections, opening hours,
+                  location and reservation call
+                  to action.
+                </p>
+
+              </div>
+
+            </div>
+
           </article>
 
-          <article class="card">
-            <div class="card-number">PROJECT 02</div>
-            <h3>Biznesa mājaslapas redesign</h3>
-            <p>Drīzumā</p>
+
+          <!-- AUTO -->
+
+          <article class="project-card">
+
+            <div
+              class="
+                project-preview
+                auto-preview
+              "
+            >
+
+              <div class="mock-browser">
+
+                <div class="mock-bar">
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                </div>
+
+                <div class="mock-content">
+                  <div class="mock-title"></div>
+                  <div class="mock-line"></div>
+                  <div class="mock-line short"></div>
+                  <div class="mock-button"></div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="project-body">
+
+              <div class="project-meta">
+
+                <span
+                  class="concept"
+                  data-i18n="concept"
+                >
+                  Concept Project
+                </span>
+
+                <span
+                  class="project-type"
+                  data-i18n="autoType"
+                >
+                  Automotive
+                </span>
+
+              </div>
+
+
+              <h3 data-i18n="autoTitle">
+                Auto Service Website
+              </h3>
+
+              <p
+                class="project-description"
+                data-i18n="autoDescription"
+              >
+                A clear local business website built
+                around services, trust and fast
+                customer contact.
+              </p>
+
+
+              <button
+                class="project-toggle"
+                data-project
+                data-i18n="viewDetails"
+              >
+                View details ↓
+              </button>
+
+
+              <div class="project-details">
+
+                <p data-i18n="autoDetails">
+                  A service-focused layout with
+                  repair categories, trust points,
+                  business information and
+                  prominent booking options.
+                </p>
+
+              </div>
+
+            </div>
+
           </article>
 
-          <article class="card">
-            <div class="card-number">PROJECT 03</div>
-            <h3>Web aplikācija</h3>
-            <p>Drīzumā</p>
+
+          <!-- BEAUTY -->
+
+          <article class="project-card">
+
+            <div
+              class="
+                project-preview
+                beauty-preview
+              "
+            >
+
+              <div class="mock-browser">
+
+                <div class="mock-bar">
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                  <span class="mock-dot"></span>
+                </div>
+
+                <div class="mock-content">
+                  <div class="mock-title"></div>
+                  <div class="mock-line"></div>
+                  <div class="mock-line short"></div>
+                  <div class="mock-button"></div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="project-body">
+
+              <div class="project-meta">
+
+                <span
+                  class="concept"
+                  data-i18n="concept"
+                >
+                  Concept Project
+                </span>
+
+                <span
+                  class="project-type"
+                  data-i18n="beautyType"
+                >
+                  Beauty
+                </span>
+
+              </div>
+
+
+              <h3 data-i18n="beautyTitle">
+                Beauty Studio Website
+              </h3>
+
+              <p
+                class="project-description"
+                data-i18n="beautyDescription"
+              >
+                A fresh service-based website with
+                a clean visual identity and easy
+                appointment discovery.
+              </p>
+
+
+              <button
+                class="project-toggle"
+                data-project
+                data-i18n="viewDetails"
+              >
+                View details ↓
+              </button>
+
+
+              <div class="project-details">
+
+                <p data-i18n="beautyDetails">
+                  Built around services, visual
+                  presentation, pricing and a simple
+                  path from discovery to booking.
+                </p>
+
+              </div>
+
+            </div>
+
           </article>
 
         </div>
+
       </div>
+
     </section>
 
 
-    <section>
-      <div class="container">
+    <!-- ABOUT -->
 
-        <div class="label">Tehnoloģijas</div>
+    <section id="about">
 
-        <h2>Ar ko es strādāju</h2>
+      <div class="container reveal">
 
-        <div class="skills">
-          <span class="skill">HTML</span>
-          <span class="skill">CSS</span>
-          <span class="skill">JavaScript</span>
-          <span class="skill">Git</span>
-          <span class="skill">GitHub</span>
+        <div
+          class="section-number"
+          style="margin-bottom:45px;"
+          data-i18n="aboutLabel"
+        >
+          03 / About
+        </div>
+
+
+        <div class="about-layout">
+
+          <h2 class="about-title">
+
+            <span
+              style="color:var(--text)"
+              data-i18n="aboutHello"
+            >
+              Hey, I'm
+            </span>
+
+            <span>
+              Oto.
+            </span>
+
+          </h2>
+
+
+          <div class="about-text">
+
+            <p data-i18n="aboutOne">
+              I'm the developer behind Webbyoto.
+              I build clean, responsive websites
+              designed to help businesses establish
+              a stronger presence online.
+            </p>
+
+            <p data-i18n="aboutTwo">
+              My focus is on websites that feel
+              straightforward, fast and easy to use
+              across desktop, tablet and mobile.
+            </p>
+
+            <p data-i18n="aboutThree">
+              Alongside new website development,
+              I redesign existing websites and
+              provide ongoing maintenance.
+            </p>
+
+          </div>
+
         </div>
 
       </div>
+
     </section>
 
 
-    <section id="contact" class="contact">
-      <div class="container">
+    <!-- SKILLS -->
 
-        <div class="label">Kontakti</div>
+    <section id="skills">
 
-        <h2>Vajadzīga mājaslapa?</h2>
+      <div class="container reveal">
 
-        <p>
-          Pastāsti par savu uzņēmumu vai ideju.
-          Varam pārrunāt, kāda mājaslapa būtu piemērotākā.
-        </p>
+        <div class="section-heading">
+
+          <div
+            class="section-number"
+            data-i18n="skillsLabel"
+          >
+            04 / Skills
+          </div>
+
+          <h2 data-i18n="skillsTitle">
+            Technology I work with.
+          </h2>
+
+        </div>
+
+
+        <div class="skills-panel">
+
+          <div class="skill-group">
+
+            <h3 data-i18n="frontend">
+              Frontend Development
+            </h3>
+
+            <div class="skills">
+              <span class="skill">HTML5</span>
+              <span class="skill">CSS3</span>
+              <span class="skill">Responsive Design</span>
+              <span class="skill">JavaScript</span>
+              <span class="skill">TypeScript</span>
+              <span class="skill">React</span>
+              <span class="skill">Tailwind CSS</span>
+              <span class="skill">Next.js</span>
+            </div>
+
+          </div>
+
+
+          <div class="skill-group">
+
+            <h3 data-i18n="backend">
+              Backend & Data
+            </h3>
+
+            <div class="skills">
+              <span class="skill">Node.js</span>
+              <span class="skill">REST APIs</span>
+              <span class="skill">PostgreSQL</span>
+            </div>
+
+          </div>
+
+
+          <div class="skill-group">
+
+            <h3 data-i18n="tools">
+              Development Tools
+            </h3>
+
+            <div class="skills">
+              <span class="skill">Git</span>
+              <span class="skill">GitHub</span>
+              <span class="skill">Linux</span>
+              <span class="skill">Ubuntu</span>
+              <span class="skill">WSL2</span>
+              <span class="skill">Bash</span>
+              <span class="skill">VS Code</span>
+              <span class="skill">GitHub Pages</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROCESS -->
+
+    <section id="process">
+
+      <div class="container reveal">
+
+        <div class="section-heading">
+
+          <div
+            class="section-number"
+            data-i18n="processLabel"
+          >
+            05 / Process
+          </div>
+
+          <h2 data-i18n="processTitle">
+            Simple process. Clear result.
+          </h2>
+
+        </div>
+
+
+        <div class="process-list">
+
+          <div class="process-item">
+
+            <div class="process-number">
+              01
+            </div>
+
+            <h3 data-i18n="discuss">
+              Discuss
+            </h3>
+
+            <p data-i18n="discussText">
+              We discuss your business, goals
+              and what the website needs to achieve.
+            </p>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <div class="process-number">
+              02
+            </div>
+
+            <h3 data-i18n="design">
+              Design
+            </h3>
+
+            <p data-i18n="designText">
+              I establish the structure and visual
+              direction before development begins.
+            </p>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <div class="process-number">
+              03
+            </div>
+
+            <h3 data-i18n="build">
+              Build
+            </h3>
+
+            <p data-i18n="buildText">
+              The design becomes a responsive
+              website built for different screens.
+            </p>
+
+          </div>
+
+
+          <div class="process-item">
+
+            <div class="process-number">
+              04
+            </div>
+
+            <h3 data-i18n="launch">
+              Launch
+            </h3>
+
+            <p data-i18n="launchText">
+              Final checks, deployment and
+              your website goes live.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RESUME -->
+
+    <section id="resume">
+
+      <div class="container reveal">
+
+        <div class="section-heading">
+
+          <div
+            class="section-number"
+            data-i18n="resumeLabel"
+          >
+            06 / Resume
+          </div>
+
+          <h2 data-i18n="resumeTitle">
+            A little more about what I do.
+          </h2>
+
+        </div>
+
+
+        <div class="resume-shell">
+
+          <div class="resume-top">
+
+            <div>
+
+              <h3 class="resume-name">
+                Oto
+              </h3>
+
+              <div
+                class="resume-role"
+                data-i18n="resumeRole"
+              >
+                Web Developer · Webbyoto
+              </div>
+
+              <p
+                class="resume-summary"
+                data-i18n="resumeSummary"
+              >
+                Web developer and creator of
+                Webbyoto, focused on building
+                clean, responsive and maintainable
+                websites for businesses.
+              </p>
+
+            </div>
+
+
+            <div class="resume-contact">
+
+              <a href="mailto:webbyoto@gmail.com">
+                webbyoto@gmail.com
+              </a>
+
+              <div>
+                Webbyoto
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="resume-grid">
+
+            <div class="resume-block">
+
+              <h3 data-i18n="profileTitle">
+                Profile
+              </h3>
+
+              <p data-i18n="profileText">
+                Focused on modern website
+                development, responsive interfaces,
+                redesign work and practical
+                solutions across devices.
+              </p>
+
+            </div>
+
+
+            <div class="resume-block">
+
+              <h3 data-i18n="coreSkills">
+                Core Skills
+              </h3>
+
+              <p>
+                HTML5 · CSS3 · JavaScript ·
+                TypeScript · React · Tailwind CSS ·
+                Next.js · Node.js · REST APIs ·
+                PostgreSQL · Git · GitHub
+              </p>
+
+            </div>
+
+
+            <div class="resume-block">
+
+              <h3>
+                Webbyoto
+              </h3>
+
+              <h4 data-i18n="resumeRoleShort">
+                Web Developer
+              </h4>
+
+              <ul>
+
+                <li data-i18n="resumeBulletOne">
+                  Build responsive websites for
+                  desktop, tablet and mobile.
+                </li>
+
+                <li data-i18n="resumeBulletTwo">
+                  Redesign existing websites with
+                  cleaner layouts and improved usability.
+                </li>
+
+                <li data-i18n="resumeBulletThree">
+                  Provide website updates
+                  and maintenance.
+                </li>
+
+                <li data-i18n="resumeBulletFour">
+                  Use Git and GitHub for version
+                  control and deployment.
+                </li>
+
+              </ul>
+
+            </div>
+
+
+            <div class="resume-block">
+
+              <h3 data-i18n="projectTitle">
+                Featured Project
+              </h3>
+
+              <h4>
+                Webbyoto Portfolio
+              </h4>
+
+              <ul>
+
+                <li data-i18n="projectBulletOne">
+                  Designed and developed a responsive
+                  business and developer portfolio.
+                </li>
+
+                <li data-i18n="projectBulletTwo">
+                  Built adaptive desktop and
+                  mobile layouts.
+                </li>
+
+                <li data-i18n="projectBulletThree">
+                  Added CSS animation and
+                  JavaScript interactions.
+                </li>
+
+                <li data-i18n="projectBulletFour">
+                  Configured GitHub version control,
+                  HTTPS and GitHub Pages deployment.
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section
+      id="contact"
+      class="contact"
+    >
+
+      <div class="container reveal">
+
+        <div
+          class="contact-label"
+          data-i18n="contactLabel"
+        >
+          07 / Let's work together
+        </div>
+
+
+        <h2>
+
+          <span data-i18n="contactOne">
+            Got an idea?
+          </span>
+
+          <span data-i18n="contactTwo">
+            Let's turn it into something
+          </span>
+
+          <span
+            class="accent"
+            data-i18n="contactThree"
+          >
+            worth visiting.
+          </span>
+
+        </h2>
+
 
         <a
-          class="button"
-          href="mailto:ostrads589@gmail.com"
+          class="email"
+          href="mailto:webbyoto@gmail.com"
         >
-          Sazināties ar mani
+          webbyoto@gmail.com ↗
         </a>
 
       </div>
+
     </section>
 
   </main>
 
 
+  <!-- FOOTER -->
+
   <footer>
+
     <div class="container footer-content">
-      <span>© 2026 Otto</span>
-      <span>Web Developer</span>
+
+      <span>
+        © 2026 Webbyoto
+      </span>
+
+      <span data-i18n="footer">
+        Designed & built by Oto
+      </span>
+
     </div>
+
   </footer>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    /*
+      TRANSLATIONS
+    */
+
+    const translations = {
+
+      en: {
+        navServices: "Services",
+        navWork: "Work",
+        navAbout: "About",
+        navSkills: "Skills",
+        navResume: "Resume",
+        navContact: "Contact ↗",
+
+        available:
+          "Available for new projects",
+
+        heroOne:
+          "Websites people",
+
+        heroTwo:
+          "actually enjoy",
+
+        heroThree:
+          "using.",
+
+        heroDescription:
+          "I'm Oto. I create fresh, responsive websites for businesses that want something cleaner, faster and more memorable than another generic template.",
+
+        startProject:
+          "Start a project ↗",
+
+        seeWork:
+          "See my work",
+
+        heroServices:
+          "Design · Development · Maintenance",
+
+        servicesLabel:
+          "01 / Services",
+
+        servicesTitle:
+          "Everything your website needs.",
+
+        developmentTitle:
+          "Website Development",
+
+        developmentText:
+          "Clean, responsive websites designed to work smoothly across desktop, tablet and mobile.",
+
+        redesignTitle:
+          "Website Redesign",
+
+        redesignText:
+          "Giving outdated websites a fresh look with improved structure, usability and mobile support.",
+
+        maintenanceTitle:
+          "Maintenance",
+
+        maintenanceText:
+          "Updates, improvements and ongoing support to keep your website fresh and working properly.",
+
+        workLabel:
+          "02 / Selected Work",
+
+        workTitle:
+          "A few examples of what I can build.",
+
+        concept:
+          "Concept Project",
+
+        restaurantType:
+          "Restaurant",
+
+        restaurantTitle:
+          "Restaurant Website",
+
+        restaurantDescription:
+          "A modern restaurant concept focused on atmosphere, menu discovery and simple reservations.",
+
+        restaurantDetails:
+          "Designed for a modern local restaurant with a strong hero, menu sections, opening hours, location and reservation call to action.",
+
+        autoType:
+          "Automotive",
+
+        autoTitle:
+          "Auto Service Website",
+
+        autoDescription:
+          "A clear local business website built around services, trust and fast customer contact.",
+
+        autoDetails:
+          "A service-focused layout with repair categories, trust points, business information and prominent booking options.",
+
+        beautyType:
+          "Beauty",
+
+        beautyTitle:
+          "Beauty Studio Website",
+
+        beautyDescription:
+          "A fresh service-based website with a clean visual identity and easy appointment discovery.",
+
+        beautyDetails:
+          "Built around services, visual presentation, pricing and a simple path from discovery to booking.",
+
+        viewDetails:
+          "View details ↓",
+
+        hideDetails:
+          "Hide details ↑",
+
+        aboutLabel:
+          "03 / About",
+
+        aboutHello:
+          "Hey, I'm",
+
+        aboutOne:
+          "I'm the developer behind Webbyoto. I build clean, responsive websites designed to help businesses establish a stronger presence online.",
+
+        aboutTwo:
+          "My focus is on websites that feel straightforward, fast and easy to use across desktop, tablet and mobile.",
+
+        aboutThree:
+          "Alongside new website development, I redesign existing websites and provide ongoing maintenance.",
+
+        skillsLabel:
+          "04 / Skills",
+
+        skillsTitle:
+          "Technology I work with.",
+
+        frontend:
+          "Frontend Development",
+
+        backend:
+          "Backend & Data",
+
+        tools:
+          "Development Tools",
+
+        processLabel:
+          "05 / Process",
+
+        processTitle:
+          "Simple process. Clear result.",
+
+        discuss:
+          "Discuss",
+
+        discussText:
+          "We discuss your business, goals and what the website needs to achieve.",
+
+        design:
+          "Design",
+
+        designText:
+          "I establish the structure and visual direction before development begins.",
+
+        build:
+          "Build",
+
+        buildText:
+          "The design becomes a responsive website built for different screens.",
+
+        launch:
+          "Launch",
+
+        launchText:
+          "Final checks, deployment and your website goes live.",
+
+        resumeLabel:
+          "06 / Resume",
+
+        resumeTitle:
+          "A little more about what I do.",
+
+        resumeRole:
+          "Web Developer · Webbyoto",
+
+        resumeSummary:
+          "Web developer and creator of Webbyoto, focused on building clean, responsive and maintainable websites for businesses.",
+
+        profileTitle:
+          "Profile",
+
+        profileText:
+          "Focused on modern website development, responsive interfaces, redesign work and practical solutions across devices.",
+
+        coreSkills:
+          "Core Skills",
+
+        resumeRoleShort:
+          "Web Developer",
+
+        resumeBulletOne:
+          "Build responsive websites for desktop, tablet and mobile.",
+
+        resumeBulletTwo:
+          "Redesign existing websites with cleaner layouts and improved usability.",
+
+        resumeBulletThree:
+          "Provide website updates and maintenance.",
+
+        resumeBulletFour:
+          "Use Git and GitHub for version control and deployment.",
+
+        projectTitle:
+          "Featured Project",
+
+        projectBulletOne:
+          "Designed and developed a responsive business and developer portfolio.",
+
+        projectBulletTwo:
+          "Built adaptive desktop and mobile layouts.",
+
+        projectBulletThree:
+          "Added CSS animation and JavaScript interactions.",
+
+        projectBulletFour:
+          "Configured GitHub version control, HTTPS and GitHub Pages deployment.",
+
+        contactLabel:
+          "07 / Let's work together",
+
+        contactOne:
+          "Got an idea?",
+
+        contactTwo:
+          "Let's turn it into something",
+
+        contactThree:
+          "worth visiting.",
+
+        footer:
+          "Designed & built by Oto"
+      },
+
+
+      /*
+        LATVIAN
+      */
+
+      lv: {
+        navServices: "Pakalpojumi",
+        navWork: "Darbi",
+        navAbout: "Par mani",
+        navSkills: "Prasmes",
+        navResume: "CV",
+        navContact: "Kontakti ↗",
+
+        available:
+          "Pieejams jauniem projektiem",
+
+        heroOne:
+          "Mājaslapas, kuras",
+
+        heroTwo:
+          "tiešām ir patīkami",
+
+        heroThree:
+          "lietot.",
+
+        heroDescription:
+          "Esmu Oto. Veidoju svaigas, responsīvas mājaslapas uzņēmumiem, kas vēlas ko tīrāku, ātrāku un atmiņā paliekošāku par kārtējo standarta veidni.",
+
+        startProject:
+          "Sākt projektu ↗",
+
+        seeWork:
+          "Apskatīt darbus",
+
+        heroServices:
+          "Dizains · Izstrāde · Uzturēšana",
+
+        servicesLabel:
+          "01 / Pakalpojumi",
+
+        servicesTitle:
+          "Viss, kas nepieciešams tavai mājaslapai.",
+
+        developmentTitle:
+          "Mājaslapu izstrāde",
+
+        developmentText:
+          "Tīras un responsīvas mājaslapas, kas ērti darbojas datorā, planšetē un telefonā.",
+
+        redesignTitle:
+          "Mājaslapu pārveide",
+
+        redesignText:
+          "Novecojušu mājaslapu modernizācija ar svaigāku dizainu, labāku struktūru un ērtāku lietošanu.",
+
+        maintenanceTitle:
+          "Uzturēšana",
+
+        maintenanceText:
+          "Atjauninājumi, uzlabojumi un atbalsts, lai mājaslapa paliktu moderna un darbotos pareizi.",
+
+        workLabel:
+          "02 / Darbu piemēri",
+
+        workTitle:
+          "Daži piemēri tam, ko varu izveidot.",
+
+        concept:
+          "Koncepta projekts",
+
+        restaurantType:
+          "Restorāns",
+
+        restaurantTitle:
+          "Restorāna mājaslapa",
+
+        restaurantDescription:
+          "Mūsdienīgs restorāna koncepts ar uzsvaru uz atmosfēru, ēdienkarti un vienkāršu rezervāciju.",
+
+        restaurantDetails:
+          "Paredzēts modernam vietējam restorānam ar spēcīgu sākuma sadaļu, ēdienkarti, darba laiku, atrašanās vietu un rezervācijas iespēju.",
+
+        autoType:
+          "Auto serviss",
+
+        autoTitle:
+          "Autoservisa mājaslapa",
+
+        autoDescription:
+          "Skaidra vietējā uzņēmuma mājaslapa, kas koncentrējas uz pakalpojumiem, uzticību un ātru saziņu.",
+
+        autoDetails:
+          "Pakalpojumu izkārtojums ar remonta kategorijām, uzņēmuma informāciju, uzticības elementiem un pieteikšanās iespējām.",
+
+        beautyType:
+          "Skaistumkopšana",
+
+        beautyTitle:
+          "Skaistumkopšanas studija",
+
+        beautyDescription:
+          "Svaiga pakalpojumu mājaslapa ar tīru vizuālo identitāti un viegli atrodamu pieraksta iespēju.",
+
+        beautyDetails:
+          "Veidota ap pakalpojumiem, vizuālo prezentāciju, cenām un vienkāršu ceļu no pakalpojuma apskates līdz pierakstam.",
+
+        viewDetails:
+          "Apskatīt vairāk ↓",
+
+        hideDetails:
+          "Paslēpt ↑",
+
+        aboutLabel:
+          "03 / Par mani",
+
+        aboutHello:
+          "Sveiki, esmu",
+
+        aboutOne:
+          "Esmu Webbyoto izstrādātājs. Veidoju tīras un responsīvas mājaslapas, kas palīdz uzņēmumiem profesionālāk sevi parādīt internetā.",
+
+        aboutTwo:
+          "Koncentrējos uz ātrām, saprotamām un ērti lietojamām mājaslapām datoriem, planšetēm un telefoniem.",
+
+        aboutThree:
+          "Papildus jaunu mājaslapu izstrādei pārveidoju esošās vietnes un nodrošinu to uzturēšanu.",
+
+        skillsLabel:
+          "04 / Prasmes",
+
+        skillsTitle:
+          "Tehnoloģijas, ar kurām strādāju.",
+
+        frontend:
+          "Frontend izstrāde",
+
+        backend:
+          "Backend un dati",
+
+        tools:
+          "Izstrādes rīki",
+
+        processLabel:
+          "05 / Process",
+
+        processTitle:
+          "Vienkāršs process. Skaidrs rezultāts.",
+
+        discuss:
+          "Pārrunājam",
+
+        discussText:
+          "Pārrunājam uzņēmumu, mērķus un to, kas mājaslapai jāsasniedz.",
+
+        design:
+          "Dizains",
+
+        designText:
+          "Nosaku struktūru un vizuālo virzienu pirms izstrādes sākuma.",
+
+        build:
+          "Izstrāde",
+
+        buildText:
+          "Dizains kļūst par responsīvu mājaslapu dažādiem ekrāniem.",
+
+        launch:
+          "Publicēšana",
+
+        launchText:
+          "Pēdējās pārbaudes, publicēšana un mājaslapa nonāk internetā.",
+
+        resumeLabel:
+          "06 / CV",
+
+        resumeTitle:
+          "Nedaudz vairāk par manu darbu.",
+
+        resumeRole:
+          "Web izstrādātājs · Webbyoto",
+
+        resumeSummary:
+          "Webbyoto izveidotājs un web izstrādātājs, kas koncentrējas uz tīrām, responsīvām un viegli uzturamām mājaslapām.",
+
+        profileTitle:
+          "Profils",
+
+        profileText:
+          "Koncentrējos uz modernu mājaslapu izstrādi, responsīvām saskarnēm, pārveidi un praktiskiem risinājumiem dažādām ierīcēm.",
+
+        coreSkills:
+          "Galvenās prasmes",
+
+        resumeRoleShort:
+          "Web izstrādātājs",
+
+        resumeBulletOne:
+          "Veidoju responsīvas mājaslapas datoriem, planšetēm un telefoniem.",
+
+        resumeBulletTwo:
+          "Pārveidoju esošās mājaslapas ar tīrāku dizainu un uzlabotu lietojamību.",
+
+        resumeBulletThree:
+          "Veicu mājaslapu atjaunināšanu un uzturēšanu.",
+
+        resumeBulletFour:
+          "Izmantoju Git un GitHub versiju kontrolei un publicēšanai.",
+
+        projectTitle:
+          "Izceltais projekts",
+
+        projectBulletOne:
+          "Izstrādāju responsīvu biznesa un izstrādātāja portfolio.",
+
+        projectBulletTwo:
+          "Izveidoju datoriem un mobilajām ierīcēm pielāgotu izkārtojumu.",
+
+        projectBulletThree:
+          "Pievienoju CSS animācijas un JavaScript mijiedarbību.",
+
+        projectBulletFour:
+          "Konfigurēju GitHub, HTTPS un GitHub Pages publicēšanu.",
+
+        contactLabel:
+          "07 / Sadarbosimies",
+
+        contactOne:
+          "Ir ideja?",
+
+        contactTwo:
+          "Pārvērtīsim to par kaut ko",
+
+        contactThree:
+          "apskates vērtu.",
+
+        footer:
+          "Dizains un izstrāde — Oto"
+      },
+
+
+      /*
+        RUSSIAN
+      */
+
+      ru: {
+        navServices: "Услуги",
+        navWork: "Работы",
+        navAbout: "Обо мне",
+        navSkills: "Навыки",
+        navResume: "Резюме",
+        navContact: "Контакты ↗",
+
+        available:
+          "Доступен для новых проектов",
+
+        heroOne:
+          "Сайты, которыми",
+
+        heroTwo:
+          "действительно приятно",
+
+        heroThree:
+          "пользоваться.",
+
+        heroDescription:
+          "Я Ото. Создаю современные адаптивные сайты для бизнеса, которому нужно что-то более чистое, быстрое и запоминающееся, чем очередной стандартный шаблон.",
+
+        startProject:
+          "Начать проект ↗",
+
+        seeWork:
+          "Посмотреть работы",
+
+        heroServices:
+          "Дизайн · Разработка · Поддержка",
+
+        servicesLabel:
+          "01 / Услуги",
+
+        servicesTitle:
+          "Всё необходимое для вашего сайта.",
+
+        developmentTitle:
+          "Разработка сайтов",
+
+        developmentText:
+          "Современные адаптивные сайты для компьютеров, планшетов и мобильных устройств.",
+
+        redesignTitle:
+          "Редизайн сайтов",
+
+        redesignText:
+          "Обновление устаревших сайтов с современным дизайном, улучшенной структурой и удобством использования.",
+
+        maintenanceTitle:
+          "Поддержка",
+
+        maintenanceText:
+          "Обновления, улучшения и поддержка, чтобы сайт оставался современным и работал корректно.",
+
+        workLabel:
+          "02 / Примеры работ",
+
+        workTitle:
+          "Несколько примеров того, что я могу создать.",
+
+        concept:
+          "Концепт-проект",
+
+        restaurantType:
+          "Ресторан",
+
+        restaurantTitle:
+          "Сайт ресторана",
+
+        restaurantDescription:
+          "Современная концепция ресторана с акцентом на атмосферу, меню и удобное бронирование.",
+
+        restaurantDetails:
+          "Концепция для современного ресторана с ярким первым экраном, меню, часами работы, адресом и возможностью бронирования.",
+
+        autoType:
+          "Автосервис",
+
+        autoTitle:
+          "Сайт автосервиса",
+
+        autoDescription:
+          "Понятный сайт локального бизнеса с акцентом на услуги, доверие и быструю связь.",
+
+        autoDetails:
+          "Структура с категориями ремонта, информацией о компании, элементами доверия и заметной записью на обслуживание.",
+
+        beautyType:
+          "Красота",
+
+        beautyTitle:
+          "Сайт студии красоты",
+
+        beautyDescription:
+          "Свежий сайт услуг с чистым визуальным стилем и удобным поиском записи.",
+
+        beautyDetails:
+          "Концепция построена вокруг услуг, визуальной презентации, цен и простого пути к записи.",
+
+        viewDetails:
+          "Подробнее ↓",
+
+        hideDetails:
+          "Скрыть ↑",
+
+        aboutLabel:
+          "03 / Обо мне",
+
+        aboutHello:
+          "Привет, я",
+
+        aboutOne:
+          "Я разработчик Webbyoto. Создаю чистые адаптивные сайты, которые помогают бизнесу профессионально выглядеть в интернете.",
+
+        aboutTwo:
+          "Я сосредоточен на быстрых, понятных и удобных сайтах для компьютеров, планшетов и телефонов.",
+
+        aboutThree:
+          "Помимо разработки новых сайтов, я обновляю существующие проекты и обеспечиваю их поддержку.",
+
+        skillsLabel:
+          "04 / Навыки",
+
+        skillsTitle:
+          "Технологии, с которыми я работаю.",
+
+        frontend:
+          "Frontend-разработка",
+
+        backend:
+          "Backend и данные",
+
+        tools:
+          "Инструменты разработки",
+
+        processLabel:
+          "05 / Процесс",
+
+        processTitle:
+          "Простой процесс. Понятный результат.",
+
+        discuss:
+          "Обсуждение",
+
+        discussText:
+          "Обсуждаем ваш бизнес, цели и задачи будущего сайта.",
+
+        design:
+          "Дизайн",
+
+        designText:
+          "Определяю структуру и визуальное направление до начала разработки.",
+
+        build:
+          "Разработка",
+
+        buildText:
+          "Дизайн превращается в адаптивный сайт для разных экранов.",
+
+        launch:
+          "Запуск",
+
+        launchText:
+          "Финальная проверка, публикация — и сайт становится доступен онлайн.",
+
+        resumeLabel:
+          "06 / Резюме",
+
+        resumeTitle:
+          "Немного больше о моей работе.",
+
+        resumeRole:
+          "Веб-разработчик · Webbyoto",
+
+        resumeSummary:
+          "Веб-разработчик и создатель Webbyoto, специализирующийся на чистых, адаптивных и удобных в поддержке сайтах.",
+
+        profileTitle:
+          "Профиль",
+
+        profileText:
+          "Современная веб-разработка, адаптивные интерфейсы, редизайн и практичные решения для разных устройств.",
+
+        coreSkills:
+          "Основные навыки",
+
+        resumeRoleShort:
+          "Веб-разработчик",
+
+        resumeBulletOne:
+          "Создаю адаптивные сайты для компьютеров, планшетов и телефонов.",
+
+        resumeBulletTwo:
+          "Обновляю существующие сайты, улучшая дизайн и удобство использования.",
+
+        resumeBulletThree:
+          "Выполняю обновления и поддержку сайтов.",
+
+        resumeBulletFour:
+          "Использую Git и GitHub для контроля версий и публикации.",
+
+        projectTitle:
+          "Избранный проект",
+
+        projectBulletOne:
+          "Разработал адаптивное портфолио для бизнеса и веб-разработчика.",
+
+        projectBulletTwo:
+          "Создал макеты для компьютеров и мобильных устройств.",
+
+        projectBulletThree:
+          "Добавил CSS-анимации и JavaScript-взаимодействия.",
+
+        projectBulletFour:
+          "Настроил GitHub, HTTPS и публикацию через GitHub Pages.",
+
+        contactLabel:
+          "07 / Давайте работать вместе",
+
+        contactOne:
+          "Есть идея?",
+
+        contactTwo:
+          "Давайте превратим её во что-то",
+
+        contactThree:
+          "действительно интересное.",
+
+        footer:
+          "Дизайн и разработка — Oto"
+      }
+    };
+
+
+    /*
+      LANGUAGE
+    */
+
+    let currentLanguage = "en";
+
+
+    function translatePage(language) {
+
+      currentLanguage =
+        translations[language]
+          ? language
+          : "en";
+
+
+      document.documentElement.lang =
+        currentLanguage;
+
+
+      document
+        .querySelectorAll("[data-i18n]")
+        .forEach((element) => {
+
+          const key =
+            element.dataset.i18n;
+
+
+          if (
+            translations[currentLanguage][key]
+          ) {
+
+            element.textContent =
+              translations[currentLanguage][key];
+
+          }
+
+        });
+
+
+      document
+        .querySelectorAll(".lang-button")
+        .forEach((button) => {
+
+          button.classList.toggle(
+            "active",
+            button.dataset.lang ===
+              currentLanguage
+          );
+
+        });
+
+
+      /*
+        Update open/closed project buttons
+        after changing language.
+      */
+
+      document
+        .querySelectorAll("[data-project]")
+        .forEach((button) => {
+
+          const card =
+            button.closest(".project-card");
+
+          const key =
+            card.classList.contains("open")
+              ? "hideDetails"
+              : "viewDetails";
+
+          button.textContent =
+            translations[currentLanguage][key];
+
+        });
+
+
+      localStorage.setItem(
+        "webbyoto-language",
+        currentLanguage
+      );
+    }
+
+
+    document
+      .querySelectorAll(".lang-button")
+      .forEach((button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            translatePage(
+              button.dataset.lang
+            );
+
+          }
+        );
+
+      });
+
+
+    /*
+      English defaults on first visit.
+
+      Afterwards remember the user's choice.
+    */
+
+    const savedLanguage =
+      localStorage.getItem(
+        "webbyoto-language"
+      );
+
+
+    translatePage(
+      savedLanguage || "en"
+    );
+
+
+    /*
+      PROJECT DETAILS
+    */
+
+    document
+      .querySelectorAll("[data-project]")
+      .forEach((button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const card =
+              button.closest(".project-card");
+
+
+            card.classList.toggle("open");
+
+
+            const key =
+              card.classList.contains("open")
+                ? "hideDetails"
+                : "viewDetails";
+
+
+            button.textContent =
+              translations[currentLanguage][key];
+
+          }
+        );
+
+      });
+
+
+    /*
+      SCROLL ANIMATIONS
+    */
+
+    const revealElements =
+      document.querySelectorAll(
+        ".reveal"
+      );
+
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+              entry.target
+                .classList
+                .add("visible");
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+
+    revealElements.forEach(
+      (element) => {
+
+        observer.observe(element);
+
+      }
+    );
+
+
+    /*
+      ========================================
+
+            YOU FOUND THE CONSOLE 👀
+
+      ========================================
+    */
+
+    console.log(`
+%c
+██╗    ██╗███████╗██████╗ ██████╗ ██╗   ██╗ ██████╗ ████████╗ ██████╗
+██║    ██║██╔════╝██╔══██╗██╔══██╗╚██╗ ██╔╝██╔═══██╗╚══██╔══╝██╔═══██╗
+██║ █╗ ██║█████╗  ██████╔╝██████╔╝ ╚████╔╝ ██║   ██║   ██║   ██║   ██║
+██║███╗██║██╔══╝  ██╔══██╗██╔══██╗  ╚██╔╝  ██║   ██║   ██║   ██║   ██║
+╚███╔███╔╝███████╗██████╔╝██████╔╝   ██║   ╚██████╔╝   ██║   ╚██████╔╝
+ ╚══╝╚══╝ ╚══════╝╚═════╝ ╚═════╝    ╚═╝    ╚═════╝    ╚═╝    ╚═════╝
+`,
+      "color:#5ee6c4;font-weight:bold;"
+    );
+
+
+    console.log(
+      "%c👀 Oh... you opened the console.",
+      "color:#64b5f6;font-size:16px;font-weight:bold;"
+    );
+
+
+    console.log(
+      "%cSince you're already looking under the hood, I guess we're past the small talk.",
+      "color:#f1f7f5;font-size:13px;"
+    );
+
+
+    console.log(
+      "%c“There are only 10 types of people in the world: those who understand binary and those who don't.”",
+      "color:#5ee6c4;font-size:13px;font-style:italic;"
+    );
+
+
+    console.log(
+      "%cAnyway... while you're here → webbyoto@gmail.com",
+      "color:#8fa7a1;font-size:12px;"
+    );
+
+  </script>
 
 </body>
 </html>
